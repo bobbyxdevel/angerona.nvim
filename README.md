@@ -4,7 +4,7 @@
 
 ```lua
 {
-  "sgross-emlix/angerona.nvim",
+  "bobbyxdevel/angerona.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
