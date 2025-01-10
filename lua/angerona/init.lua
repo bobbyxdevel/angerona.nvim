@@ -10,12 +10,13 @@ function M.setup(user_config)
     M.base_url = user_config.base_url or M.base_url
 
     vim.api.nvim_create_user_command('CreateRedmineTask', function()
+        local project_id = vim.fn.input("Project ID: ")
         local subject = vim.fn.input("Subject: ")
         local description = vim.fn.input("Description: ")
         local parent_id = vim.fn.input("Parent Ticket ID (optional): ")
 
         -- Call the function to create a task
-        M.create_task(subject, description, parent_id)
+        M.create_task(project_id, subject, description, parent_id)
     end, { desc = "Create a Redmine task via REST API" })
 end
 
@@ -27,6 +28,7 @@ function M.create_task(project_id, subject, description, parent_id)
     }
     local body = {
         issue = {
+            project_id = project_id,
             subject = subject,
             description = description,
             tracker_id = 16, -- Tracker ID for tasks
